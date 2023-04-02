@@ -2,6 +2,7 @@ import './sass/index.scss';
 import NewsApiService from './js/api-pixabay';
 import { lightbox } from './js/lightbox';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { spinnerPlay, spinnerStop } from './spinner';
 
 //searchForm = document.querySelector('.search-form');
 //galleryContainer = document.querySelector('.gallery');
