@@ -2,7 +2,7 @@ import './sass/index.scss';
 import NewsApiService from './js/api-pixabay';
 import { lightbox } from './js/lightbox';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { spinnerPlay, spinnerStop } from './spinner';
+// import { spinnerPlay, spinnerStop } from './spinner';
 
 //searchForm = document.querySelector('.search-form');
 //galleryContainer = document.querySelector('.gallery');
@@ -51,10 +51,9 @@ function onLoadMore() {
 async function fetchGallery() {
   refs.loadMoreBtn.classList.add('is-hidden');
 
-  const r = await newsApiService.fetchGallery();
-  const { hits, total } = r;
-  isShown += hits.length;
-
+ 
+  const { hits, total } = await newsApiService.fetchGallery();
+ 
   if (!hits.length) {
     Notify.failure(
       `Sorry, there are no images matching your search query. Please try again.`
@@ -64,7 +63,7 @@ async function fetchGallery() {
   }
 
   onRenderGallery(hits);
-  isShown += hits.length;
+ 
 
   if (isShown < total) {
     Notify.success(`Hooray! We found ${total} images !!!`);
