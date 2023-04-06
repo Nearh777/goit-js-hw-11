@@ -52,7 +52,7 @@ async function fetchGallery() {
   refs.loadMoreBtn.classList.add('is-hidden');
 
  
-  const { hits, total } = await newsApiService.fetchGallery();
+  const { hits, totalHits } = await newsApiService.fetchGallery();
  
   if (!hits.length) {
     Notify.failure(
@@ -65,12 +65,12 @@ async function fetchGallery() {
   onRenderGallery(hits);
  
 
-  if (isShown < total) {
-    Notify.success(`Hooray! We found ${total} images !!!`);
+  if (isShown < totalHits) {
+    Notify.success(`Hooray! We found ${totalHits} images !!!`);
     refs.loadMoreBtn.classList.remove('is-hidden');
   }
 
-  if (isShown >= total) {
+  if (isShown >= totalHits) {
     Notify.info("We're sorry, but you've reached the end of search results.");
   }
 }
