@@ -25,7 +25,7 @@ export default class NewsApiService {
 
       const data = response.data;
 
-      this.incrementPage();
+      
       return data;
     } catch (error) {
       console.error(error);
