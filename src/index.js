@@ -4,9 +4,7 @@ import { lightbox } from './js/lightbox';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // import { spinnerPlay, spinnerStop } from './spinner';
 
-//searchForm = document.querySelector('.search-form');
-//galleryContainer = document.querySelector('.gallery');
-//loadMoreBtn = document.querySelector('.load-more');
+
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
@@ -38,9 +36,9 @@ function onSearch(e) {
     return;
   }
 
-  isShown = 0;
+  
   fetchGallery();
-  onRenderGallery(hits);
+  
 }
 
 function onLoadMore() {
@@ -53,26 +51,32 @@ async function fetchGallery() {
 
  
   const { hits, totalHits } = await newsApiService.fetchGallery();
- 
   if (!hits.length) {
     Notify.failure(
-      `Sorry, there are no images matching your search query. Please try again.`
+      `Вибачте, немає зображень, які відповідають вашому пошуковому запиту. Будь ласка спробуйте ще раз.`
     );
     refs.loadMoreBtn.classList.add('is-hidden');
     return;
   }
 
+  
   onRenderGallery(hits);
- 
 
-  if (isShown < totalHits) {
-    Notify.success(`Hooray! We found ${totalHits} images !!!`);
-    refs.loadMoreBtn.classList.remove('is-hidden');
-  }
+      isShown = newsApiService.page < Math.ceil(totalHits / 40);
 
-  if (isShown >= totalHits) {
-    Notify.info("We're sorry, but you've reached the end of search results.");
-  }
+      if (isShown !== true) {
+        Notify.failure(`Упс, картинки закінчились`);
+        refs.loadMoreBtn.classList.add('is-hidden');
+        return;
+      }
+      
+      
+      
+      if (isShown === true) {
+        Notify.success(`Ура! Ми знайшли ${totalHits} картинок !!!`);
+        refs.loadMoreBtn.classList.remove('is-hidden');
+        return;
+      }
 }
 
 function onRenderGallery(elements) {
