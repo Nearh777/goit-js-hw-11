@@ -40,9 +40,7 @@ export default class NewsApiService {
     this.page = 1;
   }
 
-  resetEndOfHits() {
-    this.endOfHits = false;
-  }
+ 
 
   get query() {
     return this.searchQuery;
