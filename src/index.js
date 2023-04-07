@@ -65,7 +65,7 @@ async function fetchGallery() {
       isShown = newsApiService.page < Math.ceil(totalHits / 40);
 
       if (isShown !== true) {
-        Notify.failure(`Упс, картинки закінчились`);
+        Notify.failure(`Упс, картинки закінчились!`);
         refs.loadMoreBtn.classList.add('is-hidden');
         return;
       }
